@@ -2,6 +2,16 @@
 
 Version-controlled distribution for the Ark skill set.
 
+## Quickstart
+
+Install with the standard skills installer:
+
+```bash
+npx skills@latest add Karl0007/WishingArk
+```
+
+Pick the Ark skills you want to install. For a full Ark workflow, install the whole set and run `/ark:init` in the target project.
+
 ## Contents
 
 Ark skills live under `skills/`:
@@ -22,43 +32,41 @@ Ark skills live under `skills/`:
 - `ark-test-baseline`
 - `ark-verify`
 
-`ark-skills.json` records the packaged skill list and repository version.
+The standard installer reads `.claude-plugin/plugin.json`.
 
-## Install or update skills in a project
+`ark-skills.json` records the packaged skill list and repository version for humans and simple automation.
 
-From this repository root:
+## Local development
 
-```powershell
-python scripts/install.py --project F:\path\to\project
+List packaged skills:
+
+```bash
+scripts/list-skills.sh
 ```
 
-This installs every skill into:
+Link all skills into your local Claude skills directory while developing this repository:
+
+```bash
+scripts/link-skills.sh
+```
+
+The link script writes symlinks under:
 
 ```text
-F:\path\to\project\.claude\skills\
+~/.claude/skills/
 ```
 
-Install one skill only:
-
-```powershell
-python scripts/install.py --project F:\path\to\project --skill ark-plan
-```
-
-Preview without writing:
-
-```powershell
-python scripts/install.py --project F:\path\to\project --dry-run
-```
+For normal users, prefer `npx skills@latest add Karl0007/WishingArk` instead of linking.
 
 ## Update flow
 
-```powershell
-git -C F:\Wishing\WishingArk pull
-python F:\Wishing\WishingArk\scripts\install.py --project F:\path\to\project
-```
+Update the source repository, then reinstall through the standard installer:
 
-The installer replaces project-local copies of installed skills with the version from this repository. Keep project-specific skill changes in the source repository, not in each installed copy.
+```bash
+git -C /path/to/WishingArk pull
+npx skills@latest add Karl0007/WishingArk
+```
 
 ## Release rule
 
-Bump `VERSION` and `ark-skills.json.version` when changing skill behavior.
+Bump `VERSION`, `ark-skills.json.version`, and review `.claude-plugin/plugin.json` whenever changing the packaged skill set or skill behavior.

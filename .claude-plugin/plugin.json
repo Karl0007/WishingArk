@@ -1,0 +1,20 @@
+{
+  "name": "wishing-ark",
+  "skills": [
+    "./skills/ark-autoexec",
+    "./skills/ark-deep-think",
+    "./skills/ark-doc-review",
+    "./skills/ark-exec",
+    "./skills/ark-explore",
+    "./skills/ark-feedback",
+    "./skills/ark-init",
+    "./skills/ark-learn",
+    "./skills/ark-merge",
+    "./skills/ark-ontology",
+    "./skills/ark-plan",
+    "./skills/ark-propose",
+    "./skills/ark-sprint",
+    "./skills/ark-test-baseline",
+    "./skills/ark-verify"
+  ]
+}
