@@ -1,10 +1,29 @@
 {
   "name": "WishingArk",
   "version": "0.1.0",
+  "groups": {
+    "workflow": [
+      "ark-autoexec",
+      "ark-exec",
+      "ark-explore",
+      "ark-feedback",
+      "ark-init",
+      "ark-learn",
+      "ark-merge",
+      "ark-ontology",
+      "ark-plan",
+      "ark-propose",
+      "ark-test-baseline",
+      "ark-verify"
+    ],
+    "tools": [
+      "ark-deep-think",
+      "ark-doc-review",
+      "ark-sprint"
+    ]
+  },
   "skills": [
     "ark-autoexec",
-    "ark-deep-think",
-    "ark-doc-review",
     "ark-exec",
     "ark-explore",
     "ark-feedback",
@@ -14,8 +33,10 @@
     "ark-ontology",
     "ark-plan",
     "ark-propose",
-    "ark-sprint",
     "ark-test-baseline",
-    "ark-verify"
+    "ark-verify",
+    "ark-deep-think",
+    "ark-doc-review",
+    "ark-sprint"
   ]
 }

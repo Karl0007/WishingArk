@@ -1,20 +1,20 @@
 {
   "name": "wishing-ark",
   "skills": [
-    "./skills/ark-autoexec",
-    "./skills/ark-deep-think",
-    "./skills/ark-doc-review",
-    "./skills/ark-exec",
-    "./skills/ark-explore",
-    "./skills/ark-feedback",
-    "./skills/ark-init",
-    "./skills/ark-learn",
-    "./skills/ark-merge",
-    "./skills/ark-ontology",
-    "./skills/ark-plan",
-    "./skills/ark-propose",
-    "./skills/ark-sprint",
-    "./skills/ark-test-baseline",
-    "./skills/ark-verify"
+    "./skills/workflow/ark-autoexec",
+    "./skills/workflow/ark-exec",
+    "./skills/workflow/ark-explore",
+    "./skills/workflow/ark-feedback",
+    "./skills/workflow/ark-init",
+    "./skills/workflow/ark-learn",
+    "./skills/workflow/ark-merge",
+    "./skills/workflow/ark-ontology",
+    "./skills/workflow/ark-plan",
+    "./skills/workflow/ark-propose",
+    "./skills/workflow/ark-test-baseline",
+    "./skills/workflow/ark-verify",
+    "./skills/tools/ark-deep-think",
+    "./skills/tools/ark-doc-review",
+    "./skills/tools/ark-sprint"
   ]
 }

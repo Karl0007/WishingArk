@@ -14,11 +14,13 @@ Pick the Ark skills you want to install. For a full Ark workflow, install the wh
 
 ## Contents
 
-Ark skills live under `skills/`:
+Ark skills are grouped by role under `skills/`.
+
+### Workflow skills
+
+These implement the Ark change lifecycle:
 
 - `ark-autoexec`
-- `ark-deep-think`
-- `ark-doc-review`
 - `ark-exec`
 - `ark-explore`
 - `ark-feedback`
@@ -28,13 +30,20 @@ Ark skills live under `skills/`:
 - `ark-ontology`
 - `ark-plan`
 - `ark-propose`
-- `ark-sprint`
 - `ark-test-baseline`
 - `ark-verify`
 
+### Tool skills
+
+These are general-purpose helpers, not the core workflow pipeline:
+
+- `ark-deep-think`
+- `ark-doc-review`
+- `ark-sprint`
+
 The standard installer reads `.claude-plugin/plugin.json`.
 
-`ark-skills.json` records the packaged skill list and repository version for humans and simple automation.
+`ark-skills.json` records the packaged skill groups, flat skill list, and repository version for humans and simple automation.
 
 ## Local development
 
