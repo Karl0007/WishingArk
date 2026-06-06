@@ -1,0 +1,21 @@
+{
+  "name": "WishingArk",
+  "version": "0.1.0",
+  "skills": [
+    "ark-autoexec",
+    "ark-deep-think",
+    "ark-doc-review",
+    "ark-exec",
+    "ark-explore",
+    "ark-feedback",
+    "ark-init",
+    "ark-learn",
+    "ark-merge",
+    "ark-ontology",
+    "ark-plan",
+    "ark-propose",
+    "ark-sprint",
+    "ark-test-baseline",
+    "ark-verify"
+  ]
+}
