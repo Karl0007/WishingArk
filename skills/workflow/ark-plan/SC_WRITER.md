@@ -17,6 +17,9 @@ The task Goal describes implementation intent. SC describes observable outcomes.
 
 Think of it as: the proposal is the customer's requirements, SC is the acceptance test.
 
+If `draft.md` includes `## Architecture Effect`, read `ARCHITECTURE_SENSITIVE_PLANNING.md`.
+Your SC must also prove the Hardcode test and Deepening test described there.
+
 ## E2E-first SC rule
 
 Each task is a vertical slice testable end-to-end. Your SC must reflect this:
@@ -78,6 +81,8 @@ For each task, output:
 - Do NOT write implementation-level SC ("function X is called" — that's a constraint, not SC).
 - Every proposal § What item must have at least one SC somewhere across all tasks.
   If a proposal item has no SC → flag it: "⚠ No SC covers proposal item: '{item}'"
+- If `draft.md` includes `## Architecture Effect`, every mechanism/contrast/deepening claim
+  in that section must have at least one concrete SC.
 - If a task's Goal seems disconnected from any proposal § What item, flag it:
   "⚠ Task N Goal has no corresponding proposal requirement"
 - **Write your output to the file path specified by the dispatcher** (e.g., docs/changes/{name}/sc-draft.md).

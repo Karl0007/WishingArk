@@ -7,6 +7,8 @@ description: Transform proposal.md into an executable plan.md. Dispatches 5 micr
 
 Transform a proposal into an executable plan. You are a dispatcher — you spawn agents, relay results, and manage the loop.
 
+The plan must deliver the requested behavior and leave touched code easier to change, test, and reason about. For architecture-sensitive changes, the prompt agents use `ARCHITECTURE_SENSITIVE_PLANNING.md` to apply the Hardcode test and Deepening test without burdening ordinary changes.
+
 **You do NOT plan.** You do NOT write SC. You do NOT review the plan. Each of those is a separate agent.
 
 **Input:** `/ark:plan [change-path]` — if omitted, uses the most recently modified `docs/changes/**/proposal.md`.
@@ -383,4 +385,5 @@ You stay ultra-lean because all artifacts go to disk:
 - **File paths mechanically verified** — checker checks filesystem, not just text
 - **Scope reduction is a BLOCKER** — not a warning, not acceptable
 - **Each agent reads its own prompt file** — you never read prompt files
+- **Touched code should improve** — plans should increase locality/leverage in architecture-sensitive areas, not merely avoid breakage
 - **Discovery halts the pipeline** — user must decide before planning continues

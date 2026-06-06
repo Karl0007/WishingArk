@@ -20,6 +20,8 @@ For each task:
    - If a Constraint forbids modifying X, but the Goal requires behavior that X cannot currently support → **BLOCKER**
    - If the Goal assumes a data structure/API/framework capability that doesn't exist in the current code → **BLOCKER**
    - If two Constraints contradict each other → **BLOCKER**
+   - If a task claims to change a seam/API/runtime boundary but its Context omits the files where that boundary is implemented → **BLOCKER**
+   - If a task relies on an Architecture Effect claim but cannot achieve it with the listed Context and Constraints → **BLOCKER**
 
 ## What you do NOT check
 
@@ -48,5 +50,6 @@ For each task:
 
 - Only output BLOCKER when the contradiction is provable — not when it's "hard" or "risky".
 - **No WARNING level.** Every task is either PASS or BLOCKER. If Constraints are ambiguous or self-contradictory in wording, that IS a BLOCKER — the implementor cannot resolve ambiguity.
+- Read `ARCHITECTURE_SENSITIVE_PLANNING.md` when the plan includes `## Architecture Effect`.
 - Read code when the Scan Report alone is ambiguous. Don't guess.
 - You do NOT suggest alternative approaches. You identify contradictions. The planner fixes them.

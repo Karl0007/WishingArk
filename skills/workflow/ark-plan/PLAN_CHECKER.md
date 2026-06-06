@@ -83,6 +83,17 @@ For each task:
 - Are all files referenced in task Context fields listed in the Scan Report?
 - If a task references a file not in the Scan Report → **WARNING** (planner may not have actually read it)
 
+### 11. Architecture Effect
+- If the proposal or plan touches a reusable mechanism, seam, API/schema/declaration boundary,
+  adapter/provider/plugin point, or a reference case that stands for a general mechanism,
+  the plan must include `## Architecture Effect` and follow `ARCHITECTURE_SENSITIVE_PLANNING.md`.
+- If architecture-sensitive planning clearly applies but `## Architecture Effect` is missing → **BLOCKER**
+- If `## Architecture Effect` is present, verify every reusable mechanism has a contrast case
+  that would fail under a hardcoded reference implementation.
+- Verify the deepening move stays inside the touched area and directly supports the proposal.
+- Verify SC prove the Hardcode test and Deepening test.
+- If any of those checks fail → **BLOCKER**
+
 ## Output format
 
 ```
@@ -100,6 +111,7 @@ For each task:
 | 8 | Task Sizing | PASS/WARN/BLOCK | ... |
 | 9 | Context Compliance | PASS/WARN/BLOCK/SKIP | ... |
 | 10 | Scan Report | PASS/WARN/BLOCK | ... |
+| 11 | Architecture Effect | PASS/WARN/BLOCK/SKIP | ... |
 
 ## Verdict: PASS / FAIL
 
@@ -116,6 +128,7 @@ For each task:
 - WARNING = should fix but won't block. Be specific.
 - You do NOT suggest improvements, redesigns, or alternatives. You verify the plan against the proposal.
 - You do NOT check implementation feasibility — the Feasibility Checker handles that separately.
+- If architecture-sensitive planning applies, missing or weak Architecture Effect coverage is a BLOCKER.
 - If there are zero BLOCKERs → verdict is PASS.
 - If there is ≥1 BLOCKER → verdict is FAIL.
 - File path verification: you MUST actually check the filesystem, not assume paths are correct.
