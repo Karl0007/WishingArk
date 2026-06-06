@@ -19,6 +19,7 @@ Walk through the files + conversation. Extract:
 - Requirements stated in user messages
 - What-NOT items (things explicitly excluded — boundaries that prevent scope creep)
 - Constraints surfaced during discussion
+- Architecture intent for architecture-sensitive changes: touched seam, desired improvement to locality/leverage, and explicit architecture non-goals
 
 ## Step 2: Reconcile
 
@@ -69,6 +70,9 @@ Spec files to load:
 
 ## Constraints
 Known constraints and limitations.
+
+## Architecture Intent
+(Only for architecture-sensitive changes. Touched seam, desired improvement to locality/leverage, and explicit architecture non-goals. Do not include implementation steps.)
 ```
 
 ### Phase tagging
@@ -87,6 +91,7 @@ If you see any of these in your output, fix before showing the user:
 - Why section that only makes sense with conversation context — rewrite self-contained
 - What section that describes HOW (file paths, function signatures, migration steps) instead of WHAT the system should do
 - Empty or single-item What-NOT — you haven't thought hard enough about boundaries
+- Architecture-sensitive proposal with no Architecture Intent — add the intent at seam/effect level, not implementation details
 - Context field listing more than 5-6 spec files — probably over-loading, trim to minimum viable set
 
 ## Step 6: Confirm + Write

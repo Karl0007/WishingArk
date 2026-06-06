@@ -7,6 +7,8 @@ description: Turn ideas into bounded change proposals. Routes through brainstorm
 
 Route an idea through the right thinking process, then compile into proposal.md.
 
+For changes that touch a reusable mechanism, seam, API/schema/declaration boundary, adapter/provider/plugin point, or other architecture-sensitive area, capture the architecture intent without designing the implementation: what touched code should become easier to change, test, or reason about.
+
 **Input:**
 - `/ark:propose <idea>` — AI routes to appropriate sub-flow
 - `/ark:propose --brainstorm` — force brainstorm mode
@@ -36,6 +38,7 @@ If the signal is ambiguous (could be brainstorm or discuss), ask the user: "You 
 - [discuss.md](discuss.md) — convergent draft-correct editor
 - [decompose.md](decompose.md) — phase splitting for L3 changes
 - [grill.md](grill.md) — pressure test against project reality
+- Architecture-sensitive proposals should carry intent forward, not implementation detail: name the touched seam and desired effect on locality/leverage, then let `/ark:plan` design the work.
 
 ---
 
@@ -99,4 +102,5 @@ If user pauses mid-propose ("save this", "I'll come back", or session ending wit
 | Asking "do you approve?" | Say "Override anything above, or 'go' to write." Default is forward motion. |
 | Listing every spec in Context field | Minimum viable set. If an agent loaded ONLY these, would they have enough without noise? |
 | Compiling a proposal that only makes sense with conversation context | Self-contained test: a stranger reads this cold in 3 months. Does it stand alone? |
+| Architecture-sensitive change has no architecture intent | Add a short intent: touched seam, desired improvement, and explicit non-goals. Do not write implementation steps. |
 | Refusing to route because the topic isn't engineering | Never refuse an explicit invocation. Brainstorm, discuss, and grill work on any topic. Only Go Sequence requires an engineering change. |

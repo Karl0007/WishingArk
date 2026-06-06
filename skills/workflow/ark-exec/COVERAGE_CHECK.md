@@ -27,6 +27,8 @@ You are a test coverage checker. You verify that every Success Criterion has a c
    - Backward compatibility (if SC modifies existing types/interfaces, is the old behavior tested?)
    Flag missing edge case tests as warnings — they do not block, but the test-writer should cover them.
 
+   If an SC covers Architecture Effect, Architecture Intent, a contrast case, or deepening criteria, verify the tests exercise that architecture behavior. A test that only proves the reference case works does not cover a contrast-case SC.
+
 5. Produce a coverage matrix.
 
 ## Output format

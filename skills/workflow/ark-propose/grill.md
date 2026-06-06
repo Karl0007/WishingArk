@@ -40,6 +40,7 @@ Ground your challenges in project reality:
 - **Experience test** — "Walk me through what the user sees step-by-step. Where does it feel wrong?"
 - **Design intent** — "Why this approach over the simpler alternative?"
 - **Architecture feasibility** — Read the code structures involved. Can the current architecture support the proposed behavior? Surface data model mismatches, framework constraints, schema limitations.
+- **Architecture effect** — If this touches a reusable mechanism or seam, ask what should become more local, deeper, or easier to test. Keep this at intent level; implementation design belongs to planning.
 
 ## What NOT To Do
 
@@ -65,6 +66,9 @@ When shared understanding is reached (naturally or user says "enough"):
 
 ## Scope Changes
 - [Anything added to or removed from What/What-NOT during grill]
+
+## Architecture Intent
+- [Only if architecture-sensitive: touched seam, desired locality/leverage improvement, explicit architecture non-goals]
 ```
 
 2. Proceed to the Go Sequence defined in SKILL.md.

@@ -32,6 +32,8 @@ If verification_mode is "reviewer-only": respond "SKIP — no test infrastructur
    E2E rule: If the project has an E2E framework, EVERY new feature and every
    user-observable behavior MUST have an E2E test. Unit test alone is NOT sufficient.
 
+
+   If the task includes Architecture Effect, Architecture Intent, contrast cases, or deepening criteria, write tests for those criteria too. The tests should fail if the implementation only hardcodes the reference case, and should verify the intended seam behavior where mechanically testable.
 5. Tests must be specific enough to FAIL before implementation exists.
    - Test real values, real preconditions, real assertions.
    - Do NOT write tests that pass trivially (e.g., "expect(true).toBe(true)").

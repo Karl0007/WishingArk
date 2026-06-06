@@ -33,6 +33,7 @@ Convergent editor. Help the user clarify their idea into a concrete, bounded cha
 - Read docs/specs/ and code to ground your drafts in project reality
 - Show only what changed between iterations (don't re-show the full draft every turn)
 - Actively surface What-NOT: "I'd be tempted to also do X. Should that be explicitly out of scope?"
+- For architecture-sensitive changes, capture intent only: touched seam, desired improvement to locality/leverage, and architecture non-goals. Do not design the implementation.
 
 ## What NOT To Do
 
@@ -74,6 +75,9 @@ When the core shape is clear (What, What-NOT, main constraints all defined and s
 
 ## Constraints
 [Known constraints]
+
+## Architecture Intent
+[Only for architecture-sensitive changes: touched seam, desired improvement to locality/leverage, architecture non-goals. Omit if not applicable.]
 
 ## Open Questions
 [Anything flagged but unresolved — may be empty]

@@ -42,6 +42,15 @@ For each user-facing scenario described in the proposal:
 If the proposal explicitly excludes certain behaviors or features:
 - Verify NONE of them appear in the diff
 
+
+### 7. Architecture Effect
+If the proposal or plan includes Architecture Intent, Architecture Effect, contrast cases, or deepening criteria:
+- Did the cumulative diff implement the intended seam/mechanism rather than only the reference case?
+- Did touched code become easier to change, test, or reason about?
+- Were any reference-case hardcodes introduced in generic code?
+
+Violations are FAIL.
+
 ## Output format
 
 PASS — all proposal goals, SCs, constraints, and test coverage verified.
@@ -55,3 +64,4 @@ FAIL
 - E2E gap: "{scenario}" → no E2E test found
 - Scope creep: "{feature}" → not in proposal
 - What-NOT violation: "{excluded item}" → found in diff
+- Architecture violation: {intended effect} → {how the diff hardcodes the reference case or spreads complexity}

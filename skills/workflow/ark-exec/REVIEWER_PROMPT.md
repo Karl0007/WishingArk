@@ -28,6 +28,15 @@ For each Success Criterion:
 For each Constraint:
 1. Is it respected? (pattern followed, boundary not crossed, arch decision applied)
 
+
+## Architecture Effect check
+
+If the task includes Architecture Effect, Architecture Intent, contrast cases, or architecture constraints:
+- verify the diff implements the intended mechanism, not just the reference case;
+- verify behavior comes through the named seam/API/declaration when the task names one;
+- verify complexity became more local or easier to test, rather than duplicated across callers;
+- treat reference-case hardcoding of a claimed reusable mechanism as FAIL_IMPL.
+
 ## Scope check
 
 ### Scope Creep
