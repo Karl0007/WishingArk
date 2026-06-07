@@ -46,12 +46,13 @@ Return changed files and verification output.
 
 Use when the task touches architecture, APIs, persistence, runtime behavior, security, workflow orchestration, important docs, or any boundary where the named issue may be only a symptom.
 
-The prompt should not list every edge case. It should make the agent responsible for finding adjacent failures.
+The prompt should keep known non-negotiable constraints explicit. Do not try to enumerate every speculative edge case; make the agent responsible for finding adjacent failures inside the touched boundary and directly connected seams.
 
 ```text
 You are not just completing the listed task; you own the underlying outcome.
+Ownership is bounded by the prompt's Target, Goal, and Constraints. Do not expand implementation scope without reporting a blocker or asking for a new task.
 Before acting, identify the rule, decision, claim, or invariant that makes the work correct.
-Search for adjacent ways it could fail.
+Search for adjacent ways it could fail inside the touched boundary and directly connected seams.
 Do the smallest clean work.
 Before finishing, review your own output as if another agent produced it.
 Report what you discovered, what you changed, how you verified it, and any blocker.
@@ -82,7 +83,7 @@ One high-leverage judgment move or discovery loop that addresses the likely fail
 Concrete evidence of completion, output format/path, tests or checks, discovered risks, and blocker conditions.
 ```
 
-Keep sections short. If the prompt becomes a long checklist, replace details with a discovery instruction.
+Keep sections short. If the prompt becomes a long checklist, keep known non-negotiables explicit and replace speculative edge-case lists with a discovery instruction.
 
 ## Failure-mode step
 
@@ -108,33 +109,39 @@ For narrow work, block that failure directly in acceptance.
 For uncertain or load-bearing work, ask the receiving agent to discover the failure modes too:
 
 ```text
-The listed cases are symptoms, not the full boundary. Derive the underlying rule and search for sibling paths that violate it.
+The listed cases are symptoms, not the full boundary. Derive the underlying rule and search for sibling paths inside the touched boundary and directly connected seams that violate it.
 ```
 
 ## Judgment moves
 
 Pick one primary move. The point is to give the agent a concrete way to think, not a rule encyclopedia.
 
+Core moves:
+
 - **Hardcode test** — If the implementation hardcoded the reference case, would a contrast case fail?
 - **Deepening test** — Does this change concentrate related complexity behind a clearer interface, or spread it across callers?
-- **Deletion test** — If this module disappeared, would complexity vanish or scatter into more places?
 - **Source-of-truth test** — Where is the single source for this behavior? Is the prompt preventing duplicated rules?
 - **Consumer test** — Can the next agent or user consume the output without asking follow-up questions?
-- **Invariant discovery test** — What rule, decision, claim, or invariant is the named issue evidence for? Where else can it fail?
+- **Invariant discovery test** — What rule, decision, claim, or invariant is the named issue evidence for? Where else can it fail inside the touched boundary or directly connected seams?
+
+Advanced moves for load-bearing work:
+
 - **Naive-patch failure test** — What is the obvious small patch, and why would it still be wrong?
 - **Mutation-order test** — For durable systems, what writes happen here? Are invalid states rejected before files, artifacts, branches, checkpoints, journals, or resumes are mutated?
 - **Fallback quarantine test** — If legacy behavior remains, is it isolated from the normal path and tested as compatibility only?
+- **Deletion test** — If this abstraction disappeared, would complexity vanish or scatter into callers?
 
-Use other judgment moves when they fit better.
+Use other judgment moves when they fit better. Choose one primary move; add an advanced move only when the task's risk needs it.
 
 ## Tiny reusable patterns
+Use these as ingredients, not full prompts to paste blindly. Keep only the lines that matter for the task.
 
 ### General ownership pattern
 
 ```text
 You are not just completing the listed task; you own the underlying outcome.
 
-Before acting, identify the rule, decision, claim, or invariant that makes the work correct, then look for adjacent ways it could fail.
+Before acting, identify the rule, decision, claim, or invariant that makes the work correct, then look for adjacent failures inside the touched boundary and directly connected seams.
 
 Do the smallest useful work. Avoid hardcoding the example, hiding assumptions, or leaving the normal path dependent on fallback behavior.
 
@@ -148,9 +155,9 @@ Report what you discovered, what you changed, how you verified it, and any block
 ```text
 You are not just fixing the listed bug; you own this boundary.
 
-Before editing, derive the invariant, search for adjacent violations, and explain why the naive patch is insufficient.
+Before editing, derive the invariant, search for adjacent violations inside the touched boundary and directly connected seams, and explain why the naive patch is insufficient.
 
-Implement the smallest clean fix. Do not hardcode the example, preserve fallback as the normal path, or mutate durable state before validation.
+Implement the smallest clean fix. Do not hardcode the example, let fallback remain the normal path, or mutate durable state before validation.
 
 Before finishing, hostile-review your own diff and fix any issue found.
 
@@ -175,10 +182,10 @@ Use the Source-of-truth test.
 Return changed files, verification output, and any blocker.
 ```
 
-For discovery-first work, acceptance should also require what the agent discovered:
+For discovery-first work, acceptance should also require the discoveries that changed the implementation, verification, or blocker decision:
 
 ```text
-Report the underlying rule, adjacent failures searched, naive patch rejected, tests/checks added from discovery, and verification output.
+Report the underlying rule, adjacent failures that affected the work, naive patch rejected if relevant, tests/checks added from discovery, and verification output.
 ```
 
 For review-only tasks, require findings that explain the violated rule or risk, not style commentary.
