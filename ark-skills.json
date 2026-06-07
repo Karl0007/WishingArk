@@ -19,7 +19,8 @@
     "tools": [
       "ark-deep-think",
       "ark-doc-review",
-      "ark-sprint"
+      "ark-sprint",
+      "ark-meta-prompt"
     ]
   },
   "skills": [
@@ -37,6 +38,7 @@
     "ark-verify",
     "ark-deep-think",
     "ark-doc-review",
-    "ark-sprint"
+    "ark-sprint",
+    "ark-meta-prompt"
   ]
 }
