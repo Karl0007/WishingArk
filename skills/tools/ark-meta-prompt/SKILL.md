@@ -5,28 +5,90 @@ description: Design high-quality prompts for dispatching work to other agents. U
 
 # Ark Meta Prompt
 
-Write prompts that help another agent make good decisions without you supervising every step.
+Write dispatch prompts that help another agent make good decisions without you supervising every step.
 
-A good dispatch prompt is not a longer task description. It sets direction, taste, boundaries, method, and evidence.
+A good dispatch prompt is not a longer task description. It sets direction, taste, boundaries, method, and evidence. For hard tasks, it also gives the receiving agent ownership to discover what the prompt writer did not enumerate.
 
 ## Core philosophy
 
-```
+```text
 Abstract goal sets direction.
 Taste guides tradeoffs.
 Minimal anchors prevent drift.
 Evidence closes the loop.
+Ownership unlocks discovery.
 ```
 
 Do not replace judgment with a long checklist. Do not rely on vague quality words alone.
 
-## Process
+The best prompt gives the agent the fewest anchors needed to understand:
 
-### 1. Identify the failure mode
+- what outcome it owns;
+- what must not be broken;
+- how to think when the task is underspecified;
+- what evidence proves the work is consumable by the next person or agent.
+
+## Choose the prompt mode
+
+Use the lightest mode that fits the risk.
+
+### Direct mode
+
+Use when the task is narrow and the risks are already clear.
+
+```text
+Implement X while preserving Y.
+Use the existing Z seam.
+Return changed files and verification output.
+```
+
+### Discovery-first mode
+
+Use when the task touches architecture, APIs, persistence, runtime behavior, security, workflow orchestration, important docs, or any boundary where the named issue may be only a symptom.
+
+The prompt should not list every edge case. It should make the agent responsible for finding adjacent failures.
+
+```text
+You are not just completing the listed task; you own the underlying outcome.
+Before acting, identify the rule, decision, claim, or invariant that makes the work correct.
+Search for adjacent ways it could fail.
+Do the smallest clean work.
+Before finishing, review your own output as if another agent produced it.
+Report what you discovered, what you changed, how you verified it, and any blocker.
+```
+
+## Prompt shape
+
+Use this structure unless the task is trivial:
+
+```text
+# Target
+Exact scope: files, modules, document, question, or diff to handle.
+
+# Goal
+The deliverable and the optimization direction behind it.
+
+# Constraints
+What must not be broken, expanded, guessed, skipped, or reinterpreted.
+
+# Taste
+1-3 task-specific preferences for a good solution.
+Examples: prefer boring local changes, reuse existing seams, concentrate related rules, avoid speculative abstraction, keep downstream output easy to consume.
+
+# Method
+One high-leverage judgment move or discovery loop that addresses the likely failure mode.
+
+# Acceptance
+Concrete evidence of completion, output format/path, tests or checks, discovered risks, and blocker conditions.
+```
+
+Keep sections short. If the prompt becomes a long checklist, replace details with a discovery instruction.
+
+## Failure-mode step
 
 Before writing the prompt, ask:
 
-```
+```text
 How is this agent most likely to do the wrong thing?
 ```
 
@@ -38,59 +100,92 @@ Common failures:
 - expands scope;
 - fixes the symptom instead of the source;
 - ignores existing seams or project language;
+- accepts hidden assumptions as facts;
 - produces output the next agent cannot consume.
 
-The prompt's acceptance criteria must block the most likely failure.
+For narrow work, block that failure directly in acceptance.
 
-### 2. Write the prompt shape
+For uncertain or load-bearing work, ask the receiving agent to discover the failure modes too:
 
-Use this structure unless the task is trivial:
-
-```
-# Target
-Exact scope: files, modules, document, question, or diff to handle.
-
-# Goal
-The deliverable and the optimization direction behind it.
-
-# Constraints
-What must not be broken, expanded, skipped, or reinterpreted.
-
-# Taste
-1-3 task-specific preferences for a good solution.
-Examples: prefer boring local changes, reuse existing seams, concentrate related rules, avoid speculative abstraction, keep downstream output easy to consume.
-
-# Method
-One high-leverage judgment move that addresses the likely failure mode.
-
-# Acceptance
-Concrete evidence of completion, output format/path, tests or checks, and blocker conditions.
+```text
+The listed cases are symptoms, not the full boundary. Derive the underlying rule and search for sibling paths that violate it.
 ```
 
-### 3. Choose one judgment move
+## Judgment moves
 
-Pick one primary move. Do not make the agent run every test below.
+Pick one primary move. The point is to give the agent a concrete way to think, not a rule encyclopedia.
 
 - **Hardcode test** — If the implementation hardcoded the reference case, would a contrast case fail?
 - **Deepening test** — Does this change concentrate related complexity behind a clearer interface, or spread it across callers?
 - **Deletion test** — If this module disappeared, would complexity vanish or scatter into more places?
 - **Source-of-truth test** — Where is the single source for this behavior? Is the prompt preventing duplicated rules?
 - **Consumer test** — Can the next agent or user consume the output without asking follow-up questions?
+- **Invariant discovery test** — What rule, decision, claim, or invariant is the named issue evidence for? Where else can it fail?
+- **Naive-patch failure test** — What is the obvious small patch, and why would it still be wrong?
+- **Mutation-order test** — For durable systems, what writes happen here? Are invalid states rejected before files, artifacts, branches, checkpoints, journals, or resumes are mutated?
+- **Fallback quarantine test** — If legacy behavior remains, is it isolated from the normal path and tested as compatibility only?
 
-Use other judgment moves when they fit better. The point is to give the agent one concrete way to think, not a rule encyclopedia.
+Use other judgment moves when they fit better.
 
-### 4. Preserve high-level taste words
+## Tiny reusable patterns
 
-Words like "architecture health", "maintainability", "locality", "leverage", and "clarity" are useful. They give the agent taste.
+### General ownership pattern
 
-But anchor them:
+```text
+You are not just completing the listed task; you own the underlying outcome.
 
+Before acting, identify the rule, decision, claim, or invariant that makes the work correct, then look for adjacent ways it could fail.
+
+Do the smallest useful work. Avoid hardcoding the example, hiding assumptions, or leaving the normal path dependent on fallback behavior.
+
+Before finishing, review your own output as if another agent produced it.
+
+Report what you discovered, what you changed, how you verified it, and any blocker.
 ```
-Weak: Keep architecture healthy.
-Better: Keep architecture healthy by making the touched seam clearer and concentrating the rule in one place; show the touched seam and the evidence.
+
+### Load-bearing implementation pattern
+
+```text
+You are not just fixing the listed bug; you own this boundary.
+
+Before editing, derive the invariant, search for adjacent violations, and explain why the naive patch is insufficient.
+
+Implement the smallest clean fix. Do not hardcode the example, preserve fallback as the normal path, or mutate durable state before validation.
+
+Before finishing, hostile-review your own diff and fix any issue found.
+
+Report the invariant, sibling paths searched, discovered issues, fixes, negative tests/checks, and verification output.
 ```
 
-### 5. Require blocker behavior
+## Acceptance writing
+
+Acceptance should require evidence, not ceremony.
+
+Weak:
+
+```text
+Implement X and keep architecture healthy.
+```
+
+Better:
+
+```text
+Implement X while making the touched seam easier to change.
+Use the Source-of-truth test.
+Return changed files, verification output, and any blocker.
+```
+
+For discovery-first work, acceptance should also require what the agent discovered:
+
+```text
+Report the underlying rule, adjacent failures searched, naive patch rejected, tests/checks added from discovery, and verification output.
+```
+
+For review-only tasks, require findings that explain the violated rule or risk, not style commentary.
+
+For document tasks, require the Consumer test: what can the next agent or reader do after reading this without asking follow-up questions?
+
+## Blocker behavior
 
 A dispatch prompt should say when the agent must stop and report a blocker instead of improvising.
 
@@ -110,22 +205,24 @@ Before sending the prompt, verify:
 - Goal includes both deliverable and optimization direction.
 - Constraints prevent the obvious bad shortcut.
 - Taste is specific to this task, not generic filler.
-- Method names one judgment move.
+- Method names one judgment move or discovery loop.
 - Acceptance would catch the likely failure mode.
+- For hard tasks, the prompt gives ownership rather than only chores.
 - Output shape is clear enough for the next agent to consume.
 
 ## Anti-patterns
 
-These are weak only when they stand alone:
+These are weak when they stand alone:
 
 - "Implement X and keep architecture healthy."
 - "Review this using best practices."
 - "Research this thoroughly."
-- "Improve the prompt."
+- "Fix these issues" without asking for adjacent failures.
+- Long checklist with no ownership.
 
 Keep the high-level intent, then add anchors:
 
-```
+```text
 Implement X while keeping the touched seam easier to change.
 Do not expand scope beyond Y.
 Use the Deepening test.
