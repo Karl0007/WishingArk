@@ -16,6 +16,7 @@
     "./skills/tools/ark-deep-think",
     "./skills/tools/ark-doc-review",
     "./skills/tools/ark-sprint",
-    "./skills/tools/ark-meta-prompt"
+    "./skills/tools/ark-meta-prompt",
+    "./skills/tools/ark-user-lab"
   ]
 }

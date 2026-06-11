@@ -20,7 +20,8 @@
       "ark-deep-think",
       "ark-doc-review",
       "ark-sprint",
-      "ark-meta-prompt"
+      "ark-meta-prompt",
+      "ark-user-lab"
     ]
   },
   "skills": [
@@ -39,6 +40,7 @@
     "ark-deep-think",
     "ark-doc-review",
     "ark-sprint",
-    "ark-meta-prompt"
+    "ark-meta-prompt",
+    "ark-user-lab"
   ]
 }
