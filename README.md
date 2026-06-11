@@ -37,9 +37,12 @@ These implement the Ark change lifecycle:
 
 These are general-purpose helpers, not the core workflow pipeline:
 
+- `ark-architecture-review`
 - `ark-deep-think`
 - `ark-doc-review`
+- `ark-meta-prompt`
 - `ark-sprint`
+- `ark-user-lab`
 
 The standard installer reads `.claude-plugin/plugin.json`.
 

@@ -13,6 +13,7 @@
     "./skills/workflow/ark-propose",
     "./skills/workflow/ark-test-baseline",
     "./skills/workflow/ark-verify",
+    "./skills/tools/ark-architecture-review",
     "./skills/tools/ark-deep-think",
     "./skills/tools/ark-doc-review",
     "./skills/tools/ark-sprint",

@@ -1,6 +1,6 @@
 {
   "name": "WishingArk",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "groups": {
     "workflow": [
       "ark-autoexec",
@@ -17,6 +17,7 @@
       "ark-verify"
     ],
     "tools": [
+      "ark-architecture-review",
       "ark-deep-think",
       "ark-doc-review",
       "ark-sprint",
@@ -37,6 +38,7 @@
     "ark-propose",
     "ark-test-baseline",
     "ark-verify",
+    "ark-architecture-review",
     "ark-deep-think",
     "ark-doc-review",
     "ark-sprint",
