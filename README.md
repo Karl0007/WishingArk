@@ -79,6 +79,15 @@ git -C /path/to/WishingArk pull
 npx skills@latest add Karl0007/WishingArk
 ```
 
+## Acknowledgements
+
+WishingArk is based on practical experience using agent workflows, then fused and iterated into this skill set. Along the way, it has been informed by these open-source projects:
+
+- [get-shit-done](https://github.com/gsd-build/get-shit-done)
+- [OpenSpec](https://github.com/Fission-AI/OpenSpec)
+- [superpowers](https://github.com/obra/superpowers)
+- [Matt Pocock's skills](https://github.com/mattpocock/skills)
+
 ## Release rule
 
 Bump `VERSION`, `ark-skills.json.version`, and review `.claude-plugin/plugin.json` whenever changing the packaged skill set or skill behavior.
